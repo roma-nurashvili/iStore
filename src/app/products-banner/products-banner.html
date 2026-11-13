@@ -1,0 +1,26 @@
+<section>
+  <div class="title">
+    <div class="before"></div>
+    <h3>Bestsellers</h3>
+    <div class="after"></div>
+  </div>
+
+  <div class="products">
+    @for (item of productData(); track $index) {
+      <div class="card">
+        <img [src]="item.thumbnail" alt="{{item.title}}" />
+        <div class="productInfo">
+          <p class="name">{{item.title}}</p>
+          <ul class="price">
+            <li class="current">{{item.price.current | currency}}</li>
+            <li [style.visibility]="item.price.current == item.price.beforeDiscount ? 'hidden' : 'visible'" class="beforePrice"><del>{{item.price.beforeDiscount | currency}}</del></li>
+          </ul>
+          <ul class="buttons">
+            <li class="details">View Details</li>
+            <li class="addToBasketIcon"><i class="fa-solid fa-cart-shopping"></i></li>
+          </ul>
+        </div>
+      </div>
+    }
+  </div>
+</section>

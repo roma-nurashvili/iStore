@@ -1,0 +1,11 @@
+<section>
+  <div class="productInfo">
+    <p class="bestOffer">BEST OFFER</p>
+    <h1>{{productInfo()[randomProduct()].title}}</h1>
+    <p class="description">{{productInfo()[randomProduct()].description}}</p>
+  </div>
+  <div class="line"></div>
+  <div class="productImg">
+    <img [src]="productInfo()[randomProduct()].thumbnail" alt="{{productInfo()[randomProduct()].title}}" />
+  </div>
+</section>

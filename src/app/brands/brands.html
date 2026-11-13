@@ -1,0 +1,12 @@
+<section>
+  <div class="title">
+    <div class="before"></div>
+    <h3>Select Your Brand</h3>
+    <div class="after"></div>
+  </div>
+  <ul>
+    @for (item of brandsData(); track $index) {
+      <li>{{ item | uppercase }}</li>
+    }
+  </ul>
+</section>
