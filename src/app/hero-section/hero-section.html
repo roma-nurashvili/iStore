@@ -1,11 +1,11 @@
 <section>
   <div class="productInfo">
     <p class="bestOffer">BEST OFFER</p>
-    <h1>{{productInfo()[randomProduct()].title}}</h1>
-    <p class="description">{{productInfo()[randomProduct()].description}}</p>
+    <h1>{{this.allProduct()[randomNum()].title}}</h1>
+    <p class="description">{{allProduct()[randomNum()].description}}</p>
   </div>
   <div class="line"></div>
   <div class="productImg">
-    <img [src]="productInfo()[randomProduct()].thumbnail" alt="{{productInfo()[randomProduct()].title}}" />
+    <img [src]="allProduct()[randomNum()].thumbnail" alt="{{allProduct()[randomNum()].title}}" onerror="event.target.src='/no-image.png'"/>
   </div>
 </section>

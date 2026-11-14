@@ -11,23 +11,22 @@ import { CommonModule } from '@angular/common';
 })
 export class HeroSection {
   constructor(private product: ProductsAPI) {
-    this.getRandom()
+    this.getAllProduct(1, 50)
+    setTimeout(() => this.getRandomProduct(), 1000)
   }
 
-  public productInfo = signal<productItem[]>([])
+  public allProduct = signal<productItem[]>([])
+  public randomNum = signal<number>(0)
 
-  getProductInfo(num: number) {
-    this.product.getProducts(num).subscribe((data: Product) => {
-      this.productInfo.set(data.products)
+  getAllProduct(page: number, size: number) {
+    this.product.getProducts(page, size).subscribe((data: Product) => {
+      this.allProduct.set(data.products)
+      
     })
   }
 
-  public randomProduct = signal<number>(0)
-
-  getRandom() {
-    this.getProductInfo(50)
-    let random = Math.floor(Math.random() * this.productInfo.length)
-    this.randomProduct.set(random)
-    console.log(this.randomProduct())
+  getRandomProduct() {
+    let random = Math.round(Math.random() * this.allProduct().length)
+    this.randomNum.set(random)
   }
 }

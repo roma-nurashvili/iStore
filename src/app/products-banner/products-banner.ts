@@ -11,12 +11,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ProductsBanner {
   constructor(private productApi: ProductsAPI) {
-    this.getProducts(10)
+    this.getProducts(1, 50)
   }
 
   public productData = signal<productItem[]>([])
 
-  getProducts(num: number) {
-    this.productApi.getProducts(num).subscribe((data: Product) => this.productData.set(data.products))
+  getProducts(page: number, size: number) {
+    this.productApi.getProducts(page, size).subscribe((data: Product) => {
+      let filteredData = data.products.filter((item: productItem) => item.stock > 10).splice(0,10)
+      this.productData.set(filteredData)
+    })
   }
 }

@@ -6,7 +6,7 @@ import { Product } from './product';
 export class ProductsAPI {
     private productApi = inject(HttpClient)
 
-    getProducts(num: number) {
-        return this.productApi.get<Product>(`https://api.everrest.educata.dev/shop/products/all?page_index=1&page_size=${num}`)
+    getProducts(page: number, size: number) {
+        return this.productApi.get<Product>(`https://api.everrest.educata.dev/shop/products/all?page_index=${page}&page_size=${size}`)
     }
 }
