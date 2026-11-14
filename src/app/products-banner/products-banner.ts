@@ -2,9 +2,10 @@ import { Component, signal } from '@angular/core';
 import { ProductsAPI } from '../products-api';
 import { Product, productItem } from '../product';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   selector: 'app-products-banner',
   styleUrl: './products-banner.css',
   templateUrl: './products-banner.html',

@@ -151,4 +151,38 @@ section {
       }
     }
   }
+
+  .viewProducts {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    .line {
+      width: 100%;
+      height: 10px;
+      background-color: var(--secondary);
+      border-radius: 20px;
+    }
+
+    button {
+      width: 350px;
+      height: 50px;
+      border: none;
+      background-color: var(--secondary);
+      border-radius: 30px;
+      color: var(--grey);
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: var(--main);
+      }
+      &:active {
+        background-color: #023e5e;
+      }
+    }
+  }
 }

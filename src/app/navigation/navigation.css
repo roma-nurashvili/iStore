@@ -22,6 +22,7 @@ nav {
       justify-content: center;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
 
       img {
         width: 50px;
@@ -57,14 +58,12 @@ nav {
         &::placeholder {
           color: var(--main);
         }
-      }
-
-      input:focus {
-        box-shadow: 0 0 5px var(--secondary) inset;
-      }
-
-      input:hover {
-        box-shadow: 2px 2px 5px var(--secondary);
+        &:focus {
+          box-shadow: 0 0 5px var(--secondary) inset;
+        }
+        &:hover {
+          box-shadow: 2px 2px 5px var(--secondary);
+        }
       }
     }
 
