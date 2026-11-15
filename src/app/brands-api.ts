@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
-import { Product, productItem } from './product';
+import { Product } from './product';
 
 @Service()
 export class BrandsAPI {

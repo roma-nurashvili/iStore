@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class HeroSection {
   constructor(private product: ProductsAPI) {
     this.getAllProduct(1, 50)
-    setTimeout(() => this.getRandomProduct(), 1000)
+    setInterval(() => this.getRandomProduct(), 5000)
   }
 
   public allProduct = signal<productItem[]>([])

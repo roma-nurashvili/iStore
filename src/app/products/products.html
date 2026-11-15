@@ -1,1 +1,42 @@
-<p>products works!</p>
+<div class="products-layout">
+  <app-filter></app-filter>
+
+  <section>
+    @for (item of productData(); track $index) {
+      <div class="card">
+        <img
+          [src]="item.thumbnail"
+          alt="{{ item.title }}"
+          onerror="event.target.src = '/no-image.png'"
+        />
+        <div class="productInfo">
+          <p class="name">{{ item.title }}</p>
+          <ul class="price">
+            <li class="current">{{ item.price.current | currency }}</li>
+            <li
+              [style.visibility]="
+                item.price.current == item.price.beforeDiscount ? 'hidden' : 'visible'
+              "
+              class="beforePrice"
+            >
+              <del>{{ item.price.beforeDiscount | currency }}</del>
+            </li>
+          </ul>
+          <ul class="buttons">
+            <li class="details">View Details</li>
+            <li class="addToBasketIcon"><i class="fa-solid fa-cart-shopping"></i></li>
+          </ul>
+        </div>
+      </div>
+    }
+
+  </section>
+
+  <ul class="changePage">
+    <li><i class="fa-solid fa-angles-left"></i></li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li><i class="fa-solid fa-angles-right"></i></li>
+  </ul>
+</div>

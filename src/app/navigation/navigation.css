@@ -81,13 +81,15 @@ nav {
       font-size: 18px;
       font-weight: bold;
       cursor: pointer;
-      background-color: var(--grey);
+      background-color: white;
       padding: 10px;
       transition: 0.2s;
-    }
-
-    .authorization:hover {
-      box-shadow: 0 0 3px var(--secondary) inset;
+      &:active {
+        box-shadow: 0 0 5px var(--secondary) inset;
+      }
+      &:hover {
+        box-shadow: 2px 2px 5px var(--secondary);
+      }
     }
 
     .accSection {

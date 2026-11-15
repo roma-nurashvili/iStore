@@ -1,0 +1,30 @@
+<aside>
+  <div class="box">
+    <h3>Product Categories</h3>
+    <ul>
+      <li>Laptops</li>
+      <li>Phones</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Product Brands</h3>
+    <ul>
+      <li>All Brands</li>
+      @for (item of brandsData(); track $index) {
+        <li>{{ item | titlecase }}</li>
+      }
+    </ul>
+  </div>
+  <div class="box">
+    <h3>Product Price</h3>
+    <div class="price">
+      <label>Price from:</label>
+      <input type="number" />
+    </div>
+    <div class="price">
+      <label>Price to:</label>
+      <input type="number" />
+    </div>
+  </div>
+  <button>Apply Filter</button>
+</aside>
