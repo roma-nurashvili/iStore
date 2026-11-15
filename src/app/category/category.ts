@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { BrandsAPI } from '../brands-api';
+import { Product, productItem } from '../product';
+import { Transfer } from '../transfer';
 
 @Component({
   imports: [],
@@ -6,4 +9,15 @@ import { Component } from '@angular/core';
   styleUrl: './category.css',
   templateUrl: './category.html',
 })
-export class Category {}
+export class Category {
+  constructor(private filter: BrandsAPI) {}
+
+  filteredProduct = signal<productItem[]>([])
+
+  filterCategories(id: number) {
+    this.filter.filterCategories(id).subscribe({
+      next: (data: Product) => this.filteredProduct.set(data.products),
+      error: (error) => console.log(error)
+    })
+  }
+}

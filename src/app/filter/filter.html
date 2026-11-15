@@ -2,16 +2,18 @@
   <div class="box">
     <h3>Product Categories</h3>
     <ul>
-      <li>Laptops</li>
-      <li>Phones</li>
+      <li (click)="selectCategory('all')" [class.active]="activeCategory === 'all'">All Category</li>
+      @for (item of categoryData(); track $index) {
+        <li (click)="selectCategory(item.name)" [class.active]="activeCategory === item.name">{{item.name | titlecase}}</li>
+      }
     </ul>
   </div>
   <div class="box">
     <h3>Product Brands</h3>
     <ul>
-      <li>All Brands</li>
+      <li (click)="selectBrand('all')" [class.active]="activeBrand === 'all'">All Brands</li>
       @for (item of brandsData(); track $index) {
-        <li>{{ item | titlecase }}</li>
+        <li (click)="selectBrand(item)" [class.active]="activeBrand === item">{{ item | titlecase }}</li>
       }
     </ul>
   </div>

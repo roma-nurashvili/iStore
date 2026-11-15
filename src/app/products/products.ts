@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLinkActive } from '@angular/router';
 
 @Component({
-  imports: [Filter, CommonModule, RouterLinkActive],
+  imports: [Filter, CommonModule],
   selector: 'app-products',
   styleUrl: './products.css',
   templateUrl: './products.html',
@@ -17,11 +17,16 @@ export class Products {
   }
 
   public productData = signal<productItem[]>([])
+  public activePage: number = 1
 
   getProducts(page: number, size: number) {
     this.product.getProducts(page, size).subscribe({
       next: (data: Product) => this.productData.set(data.products),
       error: (error) => console.log(error)
     })
+
+    this.activePage = page
   }
+
+
 }

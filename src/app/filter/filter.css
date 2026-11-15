@@ -48,6 +48,11 @@ aside {
           border-radius: 30px;
           color: var(--grey);
         }
+        &.active {
+          background-color: var(--main);
+          border-radius: 30px;
+          color: var(--grey);
+        }
       }
     }
 
