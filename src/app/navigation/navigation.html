@@ -1,12 +1,41 @@
 <nav>
+  @if (isSearchOpen()) {
+    <button
+      class="searchBackdrop"
+      type="button"
+      aria-label="Close search suggestions"
+      (click)="closeSearch()"
+    ></button>
+  }
+  @if (isAccInfoVisible()) {
+    <button
+      class="accountBackdrop"
+      type="button"
+      aria-label="Close account information"
+      (click)="closeAccInfo()"
+    ></button>
+  }
   <div class="container">
     <div routerLink="/" class="logo">
       <img src="/Tech-Transparent.png" alt="iStore Logo" />
       <span>iStore</span>
     </div>
     <div class="searchTab">
-      <input [(ngModel)]="productSearch" type="text" placeholder="What are you looking for?.." />
-      <div class="searchBox"></div>
+      <input
+        [ngModel]="productSearch()"
+        (ngModelChange)="onSearchChange($event)"
+        (keydown.escape)="closeSearch()"
+        type="text"
+        placeholder="What are you looking for?.."
+      />
+      <div class="searchBox" [class.visible]="isSearchOpen()">
+        @for (item of searchedProducts(); track $index) {
+          <div class="searchedProduct">
+            <img onerror="event.target.src = '/no-image-small.jpg'" [src]="item.thumbnail" alt="{{item.title}}" />
+            <p>{{item.title}}</p>
+          </div>
+        }
+      </div>
     </div>
     @if (!isAuthenticated()) {
       <ul class="authorization" (click)="signInRequested.emit()">
@@ -16,12 +45,28 @@
     } @else {
       <div class="accSection">
         <i class="fa-solid fa-cart-shopping"></i>
-        <ul class="authorization">
-          <li class="avatar"><img [src]="userData()?.avatar" alt=""></li>
-            <li>{{userData()?.firstName | uppercase}}</li>
+        <ul class="authorization authenticated" (click)="toggleAccInfo()">
+          <li class="avatar"><img [src]="userData()?.avatar" alt="" /></li>
+          <li>{{ userData()?.firstName | uppercase }}</li>
         </ul>
         <i (click)="signOut()" class="fa-solid fa-right-from-bracket"></i>
-        <div class="accInfo"></div>
+        <div class="accInfo" [class.visible]="isAccInfoVisible()">
+          <img [src]="userData()?.avatar" alt="avatar" />
+          <ul class="personalInfo">
+            <li>
+              <strong>USER:</strong>{{ userData()?.firstName | titlecase }}
+              {{ userData()?.lastName | titlecase }}
+            </li>
+            <li><strong>AGE:</strong> {{ userData()?.age }}</li>
+            <li><strong>GENDER:</strong> {{ userData()?.gender | titlecase }}</li>
+            <li><strong>PHONE:</strong>{{ userData()?.phone }}</li>
+            <li><strong>EMAIL:</strong>{{ userData()?.email }}</li>
+          </ul>
+          <ul class="accBtns">
+            <li>Update Your Information</li>
+            <li>Change Password</li>
+          </ul>
+        </div>
       </div>
     }
   </div>
