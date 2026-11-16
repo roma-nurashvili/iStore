@@ -1,0 +1,145 @@
+<section>
+  <div class="formContainer">
+    @if (!isRegistrationVisible()) {
+    <div class="loginFormSection">
+      <div class="loginForm">
+        <form (submit)="signIn($event)">
+          <h1>Sign in</h1>
+          <div class="inputForLogin">
+            <input [formField]="loginData.email" type="email" placeholder="Email" />
+            @if (loginData.email().dirty() && loginData.email().invalid()) {
+            @for (item of loginData.email().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+            <input
+              [formField]="loginData.password"
+              autocomplete="current-password"
+              type="password"
+              placeholder="Password"
+            />
+            @if (loginData.password().dirty() && loginData.password().invalid()) {
+            @for (item of loginData.password().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+          </div>
+          <p class="forgot">Forgot your password?</p>
+          <button>SIGN IN</button>
+        </form>
+        <div class="signup">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button type="button" (click)="showRegistration()">SIGN UP</button>
+          <i class="fa-solid fa-circle-xmark" (click)="closeAuth()"></i>
+        </div>
+      </div>
+    </div>
+    }
+
+    @if (isRegistrationVisible()) {
+    <div class="registrationForm">
+      <h2>Tell Us About Yourself...</h2>
+      <form (submit)="signUp($event)" class="registration">
+        <i class="fa-solid fa-left-long" (click)="showLogin()"></i>
+        <i class="fa-solid fa-circle-xmark" (click)="closeAuth()"></i>
+        <div class="inputField">
+          <label>First Name</label>
+          <input [class.invalid]="" [formField]="signUpData.firstName" type="text" />
+          @if (signUpData.firstName().dirty() && signUpData.firstName().invalid()) {
+            @for (item of signUpData.firstName().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Last Name</label>
+          <input [formField]="signUpData.lastName" type="text" />
+          @if (signUpData.lastName().dirty() && signUpData.lastName().invalid()) {
+            @for (item of signUpData.lastName().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Age</label>
+          <input [formField]="signUpData.age" type="number" />
+          @if (signUpData.age().dirty() && signUpData.age().invalid()) {
+            @for (item of signUpData.age().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Email</label>
+          <input [formField]="signUpData.email" type="email" />
+          @if (signUpData.email().dirty() && signUpData.email().invalid()) {
+            @for (item of signUpData.email().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Password</label>
+          <input [formField]="signUpData.password" type="password" />
+          @if (signUpData.password().dirty() && signUpData.password().invalid()) {
+            @for (item of signUpData.password().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Address</label>
+          <input [formField]="signUpData.address" type="text" />
+          @if (signUpData.address().dirty() && signUpData.address().invalid()) {
+            @for (item of signUpData.address().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Phone</label>
+          <input [formField]="signUpData.phone" type="tel" />
+          @if (signUpData.phone().dirty() && signUpData.phone().invalid()) {
+            @for (item of signUpData.phone().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Zip Code</label>
+          <input [formField]="signUpData.zipcode" type="text" />
+          @if (signUpData.zipcode().dirty() && signUpData.zipcode().invalid()) {
+            @for (item of signUpData.zipcode().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Avatar</label>
+          <input [formField]="signUpData.avatar" type="text" placeholder="https://example.com" />
+          @if (signUpData.avatar().dirty() && signUpData.avatar().invalid()) {
+            @for (item of signUpData.avatar().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <div class="inputField">
+          <label>Gender</label>
+          <select [formField]="signUpData.gender">
+            <option value="OTHER"></option>
+            <option value="MALE">MALE</option>
+            <option value="FEMALE">FEMALE</option>
+          </select>
+          @if (signUpData.gender().dirty() && signUpData.gender().invalid()) {
+            @for (item of signUpData.gender().errors(); track $index) {
+              <small>{{ item.message }}</small>
+            }
+          }
+        </div>
+        <button class="signUpButton">Sign Up</button>
+      </form>
+    </div>
+    }
+  </div>
+</section>

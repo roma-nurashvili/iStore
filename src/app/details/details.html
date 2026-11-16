@@ -1,0 +1,44 @@
+<section>
+  <div class="container">
+    <div class="images">
+      <div class="side">
+        @for (item of productDetails()?.images; track $index) {
+          <img [src]="item" alt="" (click)="selectImage(item)" onerror="event.target.src = '/no-image.png'"/>
+        }
+      </div>
+      <img [src]="selectedImage() || productDetails()?.images?.[0]" alt="{{ productDetails()?.title }}" class="main" onerror="event.target.src = '/no-image.png'"/>
+    </div>
+    <div class="about">
+      <h2>{{ productDetails()?.title }}</h2>
+      <div class="characteristics">
+        <p>
+          BRAND: <span>{{ productDetails()?.brand | uppercase}}</span>
+        </p>
+        <p>
+          RATING: <span>{{ productDetails()?.rating }}</span>
+        </p>
+        <p>
+          WARRANTY: <span>{{ productDetails()?.warranty }} Years</span>
+        </p>
+        <p>
+          AVAILABLE: <span [style.color]="productDetails()?.stock ? '' : 'red'">{{ productDetails()?.stock }} items</span>
+        </p>
+      </div>
+      <div class="bottomLine">
+        <ul class="detailPrices">
+          <li>{{ productDetails()?.price.current | currency}}</li>
+          <li [style.display]="productDetails()?.price.current === productDetails()?.price.beforeDiscount ? 'none' : 'flex'">
+            <del>{{ productDetails()?.price.beforeDiscount | currency}}</del>
+          </li>
+        </ul>
+        <button onclick="addToBasket()">
+          <i class="fa-solid fa-cart-shopping"></i>ADD TO BASKET
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="description">
+    <h2>Product Description</h2>
+    <p>{{productDetails()?.description}}</p>
+  </div>
+</section>

@@ -1,0 +1,170 @@
+section {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 100px;
+
+    .images {
+      width: 520px;
+      height: 400px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+
+      .side {
+        width: 100px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 6px;
+
+        img {
+          width: 80px;
+          height: 80px;
+          object-fit: contain;
+          cursor: pointer;
+          box-shadow: 0 0 3px var(--secondary);
+          border-radius: 10px;
+          padding: 4px;
+          transition: 0.2s;
+          &:hover {
+            box-shadow: 0 0 3px 3px var(--main);
+          }
+        }
+      }
+
+      .main {
+        width: 400px;
+        height: 100%;
+        box-shadow: 0 0 5px var(--secondary);
+        border-radius: 20px;
+        object-fit: contain;
+        padding: 10px;
+      }
+    }
+
+    .about {
+      width: 600px;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: var(--grey);
+      border-radius: 30px 6px 30px 6px;
+      box-shadow: 0 0 5px var(--secondary);
+      padding-inline: 20px;
+
+      h2 {
+        font-size: 36px;
+        color: var(--main);
+      }
+
+      .characteristics {
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+
+        p {
+          display: flex;
+          justify-content: space-between;
+          color: var(--main);
+          background-color: white;
+          padding: 5px 10px;
+          border-radius: 10px;
+          font-size: 18px;
+          font-weight: 800;
+
+          span {
+            color: var(--secondary);
+          }
+        }
+      }
+
+      .bottomLine {
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 40px;
+
+        .detailPrices {
+          list-style: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 20px;
+          font-size: 48px;
+          color: var(--main);
+          font-weight: bold;
+
+          del {
+            font-size: 24px;
+            color: red;
+            font-weight: lighter;
+          }
+        }
+      }
+
+      button {
+        background-color: var(--main);
+        border: none;
+        border-radius: 30px;
+        width: 250px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          background-color: var(--secondary);
+        }
+      }
+    }
+  }
+
+  .description {
+    width: 100%;
+    max-width: 1440px;
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    border: 4px solid var(--main);
+    border-radius: 30px;
+    background-color: var(--grey);
+
+    h2 {
+      color: var(--main);
+    }
+
+    p {
+      color: var(--secondary);
+    }
+  }
+}

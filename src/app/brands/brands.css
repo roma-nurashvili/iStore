@@ -64,9 +64,9 @@ section {
       font-size: 24px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.3s;
+      transition: 0.2s;
       &:hover {
-        border: 1px solid var(--main);
+        border: 2px solid var(--main);
       }
       &:active {
         box-shadow: 0 0 3px 2px var(--secondary) inset;

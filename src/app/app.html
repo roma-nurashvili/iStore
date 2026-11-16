@@ -1,2 +1,8 @@
-<app-navigation></app-navigation>
+<app-navigation
+  [isAuthenticated]="isAuthenticated()"
+  (signInRequested)="openAuth()"
+></app-navigation>
 <router-outlet></router-outlet>
+@if (isAuthVisible()) {
+  <app-auth (closed)="closeAuth()" (signedIn)="handleSignedIn()"></app-auth>
+}

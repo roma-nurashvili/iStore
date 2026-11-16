@@ -95,7 +95,7 @@ nav {
     .accSection {
       width: 250px;
       height: 60px;
-      display: none;
+      display: flex;
       justify-content: center;
       align-items: center;
       gap: 20px;
