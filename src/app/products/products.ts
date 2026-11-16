@@ -5,6 +5,7 @@ import { Product, productItem } from '../product';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { Details } from '../details/details';
+import { AuthApi } from '../auth-api';
 
 @Component({
   imports: [Filter, CommonModule, RouterLink],
@@ -13,7 +14,7 @@ import { Details } from '../details/details';
   templateUrl: './products.html',
 })
 export class Products {
-  constructor(private product: ProductsAPI) {
+  constructor(private product: ProductsAPI, private basketApi: AuthApi) {
     this.getProducts(1, 12)
   }
 
@@ -34,5 +35,10 @@ export class Products {
     this.router.navigate(['/details', id])
   }
 
+  addToBasket(item: productItem) {
+    this.basketApi.addProductToCart(item._id).subscribe({
+      error: (error: Error) => console.error(error),
+    })
+  }
 
 }

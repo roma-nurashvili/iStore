@@ -31,7 +31,7 @@
             <del>{{ productDetails()?.price.beforeDiscount | currency}}</del>
           </li>
         </ul>
-        <button onclick="addToBasket()">
+        <button (click)="addToBasket()">
           <i class="fa-solid fa-cart-shopping"></i>ADD TO BASKET
         </button>
       </div>

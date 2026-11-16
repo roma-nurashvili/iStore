@@ -44,7 +44,7 @@
       </ul>
     } @else {
       <div class="accSection">
-        <i class="fa-solid fa-cart-shopping"></i>
+        <i routerLink="/basket/{{userData()?.firstName}}{{userData()?.lastName}}" class="fa-solid fa-cart-shopping"></i>
         <ul class="authorization authenticated" (click)="toggleAccInfo()">
           <li class="avatar"><img [src]="userData()?.avatar" alt="" /></li>
           <li>{{ userData()?.firstName | uppercase }}</li>

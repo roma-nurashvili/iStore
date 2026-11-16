@@ -3,6 +3,7 @@ import { ProductsAPI } from '../products-api';
 import { ActivatedRoute, Params } from '@angular/router';
 import { productItem } from '../product';
 import { CommonModule } from '@angular/common';
+import { AuthApi } from '../auth-api';
 
 @Component({
   imports: [CommonModule],
@@ -11,7 +12,11 @@ import { CommonModule } from '@angular/common';
   templateUrl: './details.html',
 })
 export class Details {
-  constructor(public actR: ActivatedRoute, public product: ProductsAPI) {
+  constructor(
+    public actR: ActivatedRoute,
+    public product: ProductsAPI,
+    private basketApi: AuthApi,
+  ) {
     this.viewSelected()
   }
 
@@ -33,5 +38,17 @@ export class Details {
 
   selectImage(img: string) {
     this.selectedImage.set(img)
+  }
+
+  addToBasket() {
+    const product = this.productDetails()
+    if (!product) {
+      console.error('Cannot add the product before its details have loaded.')
+      return
+    }
+
+    this.basketApi.addProductToCart(product._id).subscribe({
+      error: (error: Error) => console.error(error),
+    })
   }
 }
