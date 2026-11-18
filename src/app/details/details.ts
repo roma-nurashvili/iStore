@@ -39,16 +39,4 @@ export class Details {
   selectImage(img: string) {
     this.selectedImage.set(img)
   }
-
-  addToBasket() {
-    const product = this.productDetails()
-    if (!product) {
-      console.error('Cannot add the product before its details have loaded.')
-      return
-    }
-
-    this.basketApi.addProductToCart(product._id).subscribe({
-      error: (error: Error) => console.error(error),
-    })
-  }
 }

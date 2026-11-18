@@ -1,10 +1,9 @@
 import { Component, signal } from '@angular/core';
 import { ProductsAPI } from '../products-api';
 import { Product, productItem } from '../product';
-import { CommonModule } from '@angular/common';
 
 @Component({
-  imports: [CommonModule],
+  imports: [],
   selector: 'app-hero-section',
   styleUrl: './hero-section.css',
   templateUrl: './hero-section.html',
@@ -26,7 +25,7 @@ export class HeroSection {
   }
 
   getRandomProduct() {
-    let random = Math.round(Math.random() * this.allProduct().length)
+    let random = Math.floor(Math.random() * this.allProduct().length)
     this.randomNum.set(random)
   }
 }

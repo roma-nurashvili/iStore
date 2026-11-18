@@ -24,10 +24,4 @@ export class ProductsBanner {
       this.productData.set(filteredData)
     })
   }
-
-  addToBasket(item: productItem) {
-    this.basketApi.addProductToCart(item._id).subscribe({
-      error: (error: Error) => console.error(error),
-    })
-  }
 }

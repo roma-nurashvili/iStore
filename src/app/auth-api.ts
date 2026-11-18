@@ -41,27 +41,6 @@ export class AuthApi {
     return this.authApi.patch<BasketCart>("https://api.everrest.educata.dev/shop/cart/product", body, this.token())
   }
 
-  addProductToCart(id: string) {
-    return this.getBasket().pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status !== 404) {
-          return throwError(() => error);
-        }
-
-        return of(undefined);
-      }),
-      switchMap((basket) => {
-        const existingItem = basket?.products.find((item) => item.productId === id);
-        const request: Basket = {
-          id,
-          quantity: (existingItem?.quantity ?? 0) + 1,
-        };
-
-        return basket ? this.updateBasket(request) : this.addToBasket(request);
-      }),
-    );
-  }
-
   deleteItemFromBasket() {
     return this.authApi.delete("https://api.everrest.educata.dev/shop/cart/product", this.token())
   }

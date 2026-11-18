@@ -1,4 +1,4 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, effect, input, output, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthApi } from '../auth-api';
@@ -18,7 +18,13 @@ import { toObservable } from '@angular/core/rxjs-interop';
 })
 export class Navigation {
   constructor(private user: AuthApi, private searchApi: FilterApi, private cookie: CookieService) {
-    this.getUserInfo()
+    effect(() => {
+      if(this.isAuthenticated()) {
+        this.getUserInfo()
+      } else {
+        this.userData.set(undefined)
+      }
+    })
     this.search()
   }
 
@@ -41,7 +47,7 @@ export class Navigation {
   }
 
   signOut() {
-    this.cookie.delete("user")
+    this.cookie.delete("user", '/')
     window.location.reload()
   }
 

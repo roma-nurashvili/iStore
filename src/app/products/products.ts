@@ -35,10 +35,4 @@ export class Products {
     this.router.navigate(['/details', id])
   }
 
-  addToBasket(item: productItem) {
-    this.basketApi.addProductToCart(item._id).subscribe({
-      error: (error: Error) => console.error(error),
-    })
-  }
-
 }

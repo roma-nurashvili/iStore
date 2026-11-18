@@ -78,7 +78,7 @@ export class Auth {
     e.preventDefault();
     this.service.signIn(this.loginData().value()).subscribe({
       next: (data: JWT) => {
-        this.cookie.set('user', data.access_token);
+        this.cookie.set('user', data.access_token, {path: '/'});
         this.signedIn.emit();
       },
       error: (error: Error) => console.log(error),
