@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { BrandsAPI } from '../brands-api';
 import { Product, productItem } from '../product';
-import { Transfer } from '../transfer';
+import { FilterApi } from '../filter-api';
+import { TransferTool } from '../transfer-tool';
+import { Router } from '@angular/router';
 
 @Component({
   imports: [],
@@ -10,14 +11,19 @@ import { Transfer } from '../transfer';
   templateUrl: './category.html',
 })
 export class Category {
-  constructor(private filter: BrandsAPI) {}
+  constructor(private filterApi: FilterApi, public transferFile: TransferTool, private router: Router) {}
 
   filteredProduct = signal<productItem[]>([])
 
-  filterCategories(id: number) {
-    this.filter.filterCategories(id).subscribe({
-      next: (data: Product) => this.filteredProduct.set(data.products),
-      error: (error) => console.log(error)
+  filter(page: number, id: string, brand: string) {
+    this.transferFile.selectedCategory.set(brand)
+    this.router.navigate(["/products"])
+    this.filterApi.filterCategories(page, id).subscribe({
+      next: (data: Product) => {
+        this.filteredProduct.set(data.products)
+        this.transferFile.transfer.next(this.filteredProduct())
+      },
+      error: (err: Error) => console.error(err)
     })
   }
 }

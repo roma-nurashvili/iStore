@@ -6,6 +6,7 @@ import { FilterApi } from '../filter-api';
 import { Product, productItem } from '../product';
 import { ProductsAPI } from '../products-api';
 import { FormsModule } from '@angular/forms';
+import { TransferTool } from '../transfer-tool';
 
 @Component({
   imports: [CommonModule, FormsModule],
@@ -14,10 +15,19 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './filter.html',
 })
 export class Filter {
-  constructor(private brands: BrandsAPI, private filterApi: FilterApi, private productApi: ProductsAPI) {
+  constructor(private brands: BrandsAPI, private filterApi: FilterApi, private productApi: ProductsAPI, private transferTool: TransferTool) {
     this.getBrands()
     this.getCategories()
-    this.getProducts(1, 12)
+    const selectedBrand = this.transferTool.selectedBrand()
+    const selectedCategory = this.transferTool.selectedCategory()
+    if (selectedBrand !== null) {
+      this.activeBrand.set(selectedBrand)
+      this.transferTool.selectedBrand.set(null)
+    }
+    if(selectedCategory !== null) {
+      this.activeCategory.set(selectedCategory)
+      this.transferTool.selectedCategory.set(null)
+    }
   }
 
   @Output() fileTransfer: EventEmitter<productItem[]> = new EventEmitter()
@@ -25,8 +35,8 @@ export class Filter {
 
   public brandsData = signal<string[]>([])
   public categoryData = signal<CategoryInterface[]>([])
-  public activeBrand = signal<string>("")
-  public activeCategory = signal<string>("")
+  public activeBrand = signal<string>("all")
+  public activeCategory = signal<string>("all")
   public categoryFilter = signal<productItem[] | undefined>(undefined)
   public brandFilter = signal<productItem[] | undefined>(undefined)
   public allProducts = signal<productItem[] | undefined>(undefined)
@@ -58,7 +68,6 @@ export class Filter {
       },
       error: (err: Error) => console.error(err)
     })
-    this.fileTransfer.emit(this.categoryFilter())
   }
 
   filterBrand(page: number, brand: string) {

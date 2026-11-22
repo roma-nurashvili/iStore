@@ -25,6 +25,7 @@ export class Brands {
   }
 
   filter(page: number, brand: string) {
+    this.transferFile.selectedBrand.set(brand)
     this.router.navigate(["/products"])
     this.filterApi.filterBrands(page, brand).subscribe({
       next: (data: Product) => {
