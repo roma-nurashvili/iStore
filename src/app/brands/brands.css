@@ -64,7 +64,6 @@ section {
       font-size: 24px;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
       &:hover {
         border: 2px solid var(--main);
       }

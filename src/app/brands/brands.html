@@ -6,7 +6,7 @@
   </div>
   <ul>
     @for (item of brandsData(); track $index) {
-      <li>{{ item | uppercase }}</li>
+      <li (click)="filter(1, item)">{{ item | uppercase }}</li>
     }
   </ul>
 </section>

@@ -1,5 +1,5 @@
 <div class="products-layout">
-  <app-filter></app-filter>
+  <app-filter (fileTransfer)="filter($event)"></app-filter>
 
   <section>
     @for (item of productData(); track $index) {
@@ -23,7 +23,7 @@
             </li>
           </ul>
           <ul class="buttons">
-            <li routerLink="/details/{{item._id}}" class="details">View Details</li>
+            <li routerLink="/details/{{ item._id }}" class="details">View Details</li>
             <li class="addToBasketIcon">
               <i class="fa-solid fa-cart-shopping"></i>
             </li>
@@ -31,14 +31,25 @@
         </div>
       </div>
     }
-
   </section>
 
-  <ul class="changePage">
-    <li (click)="getProducts(activePage -1, 12)" [style.visibility]="activePage === 1 ? 'hidden' : 'visible'"><i class="fa-solid fa-angles-left"></i></li>
-    <li (click)="this.getProducts(1, 12)" [class.active]="activePage === 1">1</li>
-    <li (click)="this.getProducts(2, 12)" [class.active]="activePage === 2">2</li>
-    <li (click)="this.getProducts(3, 12)" [class.active]="activePage === 3">3</li>
-    <li (click)="getProducts(activePage +1, 12)" [style.visibility]="activePage === 3 ? 'hidden' : 'visible'"><i class="fa-solid fa-angles-right"></i></li>
-  </ul>
+  @if (!isFiltered()) {
+    <ul class="changePage">
+      <li
+        (click)="getProducts(activePage - 1, 12)"
+        [style.visibility]="activePage === 1 ? 'hidden' : 'visible'"
+      >
+        <i class="fa-solid fa-angles-left"></i>
+      </li>
+      <li (click)="this.getProducts(1, 12)" [class.active]="activePage === 1">1</li>
+      <li (click)="this.getProducts(2, 12)" [class.active]="activePage === 2">2</li>
+      <li (click)="this.getProducts(3, 12)" [class.active]="activePage === 3">3</li>
+      <li
+        (click)="getProducts(activePage + 1, 12)"
+        [style.visibility]="activePage === 3 ? 'hidden' : 'visible'"
+      >
+        <i class="fa-solid fa-angles-right"></i>
+      </li>
+    </ul>
+  }
 </div>

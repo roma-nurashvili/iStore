@@ -1,11 +1,17 @@
-<section>
-  <div class="productInfo">
-    <p class="bestOffer">BEST OFFER</p>
-    <h1>{{this.allProduct()[randomNum()].title}}</h1>
-    <p class="description">{{allProduct()[randomNum()].description}}</p>
-  </div>
-  <div class="line"></div>
-  <div class="productImg">
-    <img [src]="allProduct()[randomNum()].thumbnail" alt="{{allProduct()[randomNum()].title}}" onerror="event.target.src='/no-image.png'"/>
-  </div>
-</section>
+@if (allProduct().length > 0) {
+  <section>
+    <div class="productInfo">
+      <p class="bestOffer">BEST OFFER</p>
+      <h1>{{ this.allProduct()[randomNum()].title }}</h1>
+      <p class="description">{{ allProduct()[randomNum()].description }}</p>
+    </div>
+    <div class="line"></div>
+    <div class="productImg">
+      <img
+        [src]="allProduct()[randomNum()].thumbnail"
+        alt="{{ allProduct()[randomNum()].title }}"
+        onerror="event.target.src = '/no-image.png'"
+      />
+    </div>
+  </section>
+}

@@ -2,18 +2,18 @@
   <div class="box">
     <h3>Product Categories</h3>
     <ul>
-      <li (click)="selectCategory('all')" [class.active]="activeCategory === 'all'">All Category</li>
+      <li (click)="getProducts(1, 12)" [class.active]=" activeCategory() === 'all'">All Category</li>
       @for (item of categoryData(); track $index) {
-        <li (click)="selectCategory(item.name)" [class.active]="activeCategory === item.name">{{item.name | titlecase}}</li>
+        <li (click)="filterCategory(1, item.id, item.name)" [class.active]="activeCategory() === item.name">{{item.name | titlecase}}</li>
       }
     </ul>
   </div>
   <div class="box">
     <h3>Product Brands</h3>
     <ul>
-      <li (click)="selectBrand('all')" [class.active]="activeBrand === 'all'">All Brands</li>
+      <li (click)="getProducts(1, 12)" [class.active]="activeBrand() === 'all'">All Brands</li>
       @for (item of brandsData(); track $index) {
-        <li (click)="selectBrand(item)" [class.active]="activeBrand === item">{{ item | titlecase }}</li>
+        <li (click)="filterBrand(1, item)" [class.active]="activeBrand() === item">{{ item | titlecase }}</li>
       }
     </ul>
   </div>
@@ -21,12 +21,12 @@
     <h3>Product Price</h3>
     <div class="price">
       <label>Price from:</label>
-      <input type="number" />
+      <input [(ngModel)]="minPrice" type="number" />
     </div>
     <div class="price">
       <label>Price to:</label>
-      <input type="number" />
+      <input [(ngModel)]="maxPrice" type="number" />
     </div>
   </div>
-  <button>Apply Filter</button>
+  <button (click)="filterPrice(minPrice, maxPrice)">Apply Filter</button>
 </aside>
