@@ -7,25 +7,17 @@
 
     <div class="basketContent">
       <div class="basketProducts">
-        <article class="basketProduct">
-          <img src="/no-image.png" alt="Example product one" />
-          <div class="productInfo">
-            <h2>Example Product One</h2>
-            <p>Brand: Example Brand</p>
-            <p>Quantity: 1</p>
-          </div>
-          <p class="productPrice">$249.99</p>
-        </article>
-
-        <article class="basketProduct">
-          <img src="/no-image.png" alt="Example product two" />
-          <div class="productInfo">
-            <h2>Example Product Two</h2>
-            <p>Brand: Example Brand</p>
-            <p>Quantity: 1</p>
-          </div>
-          <p class="productPrice">$79.99</p>
-        </article>
+        @for (item of userBasket(); track $index) {
+          <article class="basketProduct">
+            <img [src]="item.productId" alt="{{item}}" />
+            <div class="productInfo">
+              <h2>Example Product One</h2>
+              <p>Brand: Example Brand</p>
+              <p>Quantity: {{item.quantity}}</p>
+            </div>
+            <p class="productPrice">$249.99</p>
+          </article>
+        }
       </div>
 
       <aside class="basketSummary">

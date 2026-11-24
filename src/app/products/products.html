@@ -24,7 +24,7 @@
           </ul>
           <ul class="buttons">
             <li routerLink="/details/{{ item._id }}" class="details">View Details</li>
-            <li class="addToBasketIcon">
+            <li (click)="addToBasket({id: item._id, quantity: 1})" class="addToBasketIcon">
               <i class="fa-solid fa-cart-shopping"></i>
             </li>
           </ul>

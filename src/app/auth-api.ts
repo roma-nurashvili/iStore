@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Service } from '@angular/core';
 import { JWT, login, Register, UserInfo } from './user-info';
 import { CookieService } from 'ngx-cookie-service';
-import { Basket, BasketCart } from './basket';
+import { Basket, BasketCart, BasketCartProduct } from './basket';
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, of, switchMap, throwError } from 'rxjs';
 

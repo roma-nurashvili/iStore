@@ -1,6 +1,7 @@
 import { Service, signal } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { productItem } from './product';
+import { BasketCart } from './basket';
 
 @Service()
 export class TransferTool {

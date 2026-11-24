@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { AuthApi } from '../auth-api';
-import { BasketCart } from '../basket';
-import { HttpErrorResponse } from '@angular/common/http';
+import { BasketCart, BasketCartProduct } from '../basket';
 
 @Component({
   imports: [],
@@ -11,19 +10,18 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class Basket {
   constructor(private basketApi: AuthApi) {
-    this.getBasket()
+    this.getBasket();
   }
 
-  public userBasket = signal<BasketCart | undefined>(undefined)
+  public userBasket = signal<BasketCartProduct[]>([]);
 
   getBasket() {
     this.basketApi.getBasket().subscribe({
-      next: (data: BasketCart) => this.userBasket.set(data),
-      error: (error: HttpErrorResponse) => {
-        if (error.status !== 404) {
-          console.error(error);
-        }
+      next: (data: BasketCart) => {
+        this.userBasket.set(data.products)
+        console.log(this.userBasket())
       },
-    })
+      error: (err: Error) => console.error(err),
+    });
   }
 }
