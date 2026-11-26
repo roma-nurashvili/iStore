@@ -41,7 +41,10 @@ export class AuthApi {
     return this.authApi.patch<BasketCart>("https://api.everrest.educata.dev/shop/cart/product", body, this.token())
   }
 
-  removeFromBasket() {
-    return this.authApi.delete("https://api.everrest.educata.dev/shop/cart/product", this.token())
+  removeFromBasket(id: string) {
+    return this.authApi.delete("https://api.everrest.educata.dev/shop/cart/product", {
+      ...this.token(),
+      body: { id },
+    })
   }
 }

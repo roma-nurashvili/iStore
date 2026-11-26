@@ -43,6 +43,7 @@
 }
 
 .basketProduct {
+  position: relative;
   min-height: 170px;
   padding: 16px;
   border: 1px solid var(--main);
@@ -78,11 +79,74 @@
   margin-top: 6px;
 }
 
+.productActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.quantityControls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--main);
+  border-radius: 20px;
+  color: var(--main);
+}
+
+.quantityControls button,
+.deleteButton {
+  border: 0;
+  color: var(--main);
+  cursor: pointer;
+  font: inherit;
+}
+
+.quantityControls button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  font-size: 18px;
+}
+
+.quantityControls button:disabled,
+.deleteButton:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+
+.deleteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: #ffe5e5;
+  color: #a00000;
+}
+
 .productPrice {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
   color: var(--main);
   font-size: 22px;
   font-weight: bold;
   white-space: nowrap;
+}
+
+.productPrice del {
+  display: block;
+  margin-top: 6px;
+  color: var(--main);
+  font-size: 16px;
+  font-weight: normal;
+  opacity: 0.7;
+  text-align: right;
 }
 
 .basketSummary {
@@ -154,7 +218,4 @@
     height: 90px;
   }
 
-  .productPrice {
-    grid-column: 2;
-  }
 }

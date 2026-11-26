@@ -2,20 +2,53 @@
   <div class="basketContainer">
     <div class="basketHeading">
       <h1>Shopping Basket</h1>
-      <p>2 items in your basket</p>
+      <p>{{ itemsCount() }} {{ itemsCount() === 1 ? 'item' : 'items' }} in your basket</p>
     </div>
 
     <div class="basketContent">
       <div class="basketProducts">
-        @for (item of userBasket(); track $index) {
+        @for (item of basketItems(); track item.product._id) {
           <article class="basketProduct">
-            <img [src]="item.productId" alt="{{item}}" />
+            <img [src]="item.product.thumbnail" [alt]="item.product.title" />
             <div class="productInfo">
-              <h2>Example Product One</h2>
-              <p>Brand: Example Brand</p>
-              <p>Quantity: {{item.quantity}}</p>
+              <h2>{{ item.product.title | titlecase }}</h2>
+              <p>Brand: {{ item.product.brand | uppercase }}</p>
+              <div class="productActions">
+                <div class="quantityControls" aria-label="Product quantity">
+                  <button
+                    type="button"
+                    [disabled]="item.basketItem.quantity <= 1 || pendingProductIds().includes(item.product._id)"
+                    [attr.aria-label]="'Decrease quantity of ' + item.product.title"
+                    (click)="changeQuantity(item.product._id, item.basketItem.quantity - 1)"
+                  >
+                    −
+                  </button>
+                  <span>{{ item.basketItem.quantity }}</span>
+                  <button
+                    type="button"
+                    [disabled]="pendingProductIds().includes(item.product._id)"
+                    [attr.aria-label]="'Increase quantity of ' + item.product.title"
+                    (click)="changeQuantity(item.product._id, item.basketItem.quantity + 1)"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
             </div>
-            <p class="productPrice">$249.99</p>
+            <div class="productPrice">
+              <p>{{ item.product.price.current | currency }}</p>
+              @if (item.product.price.current !== item.product.price.beforeDiscount) {
+                <del style="color: red;">{{ item.product.price.beforeDiscount | currency }}</del>
+              }
+            </div>
+            <button
+              type="button"
+              class="deleteButton"
+              [disabled]="pendingProductIds().includes(item.product._id)"
+              (click)="deleteProduct(item.product._id)"
+            >
+             <i class="fa-solid fa-trash"></i>
+            </button>
           </article>
         }
       </div>
@@ -24,17 +57,17 @@
         <h2>Order Summary</h2>
         <div class="summaryLine">
           <span>Items</span>
-          <span>2</span>
+          <span>{{ itemsCount() }}</span>
         </div>
         <div class="summaryLine">
           <span>Subtotal</span>
-          <span>$329.98</span>
+          <span>{{ subtotal() | currency }}</span>
         </div>
         <div class="summaryLine total">
           <strong>Total</strong>
-          <strong>$329.98</strong>
+          <strong>{{ subtotal() | currency }}</strong>
         </div>
-        <a class="continueShopping" href="/products">Continue Shopping</a>
+        <a class="continueShopping" href="/products">Checkout</a>
       </aside>
     </div>
   </div>
